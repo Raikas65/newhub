@@ -1,0 +1,12 @@
+{
+  "name": "togetherjs-hub",
+  "version": "1.0.0",
+  "description": "Minimal TogetherJS Hub server for Koyeb",
+  "main": "hub/server.cjs",
+  "scripts": {
+    "postinstall": "node scripts/fetch.js"
+  },
+  "dependencies": {
+    "ws": "^8.17.0"
+  }
+}
