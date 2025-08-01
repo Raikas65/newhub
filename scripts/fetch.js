@@ -2,7 +2,7 @@ const fs = require('fs');
 const https = require('https');
 const path = require('path');
 
-const url = 'https://togetherjs.com/hub/server.js';
+const url = 'https://raw.githubusercontent.com/mozilla/togetherjs/master/togetherjs/hub/server.js';
 const destDir = path.join(__dirname, '..', 'hub');
 const destFile = path.join(destDir, 'server.cjs');
 
