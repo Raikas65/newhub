@@ -1,32 +1,22 @@
-const fs = require('fs');
-const https = require('https');
-const path = require('path');
+// scripts/fetch.js
+import { writeFile } from 'node:fs/promises';
+import fetch from 'node-fetch';
 
-const url = 'https://raw.githubusercontent.com/jsfiddle/togetherjs/master/hub/server.js';
-const destDir = path.join(__dirname, '..', 'hub');
-const destFile = path.join(destDir, 'server.cjs');
+const files = [
+  {
+    src: 'https://raw.githubusercontent.com/jsfiddle/togetherjs/develop/hub/server.js',
+    dest: 'hub/server.cjs',       // jei nori .cjs – ok
+  },
+  {
+    src: 'https://raw.githubusercontent.com/jsfiddle/togetherjs/develop/hub/websocket-compat.js',
+    dest: 'hub/websocket-compat.js',
+  },
+];
 
-if (!fs.existsSync(destDir)) {
-  fs.mkdirSync(destDir, { recursive: true });
+for (const f of files) {
+  const res = await fetch(f.src);
+  if (!res.ok) throw new Error(`Download failed: ${f.src} -> ${res.status}`);
+  await writeFile(f.dest, await res.text());
+  console.log(`Saved ${f.dest}`);
 }
 
-console.log(`Downloading TogetherJS Hub from ${url}...`);
-
-https.get(url, (res) => {
-  if (res.statusCode !== 200) {
-    console.error(`Failed to download: ${res.statusCode}`);
-    process.exit(1);
-  }
-
-  const file = fs.createWriteStream(destFile);
-  res.pipe(file);
-
-  file.on('finish', () => {
-    file.close(() => {
-      console.log(`TogetherJS Hub saved as ${destFile}`);
-    });
-  });
-}).on('error', (err) => {
-  console.error(`Download error: ${err.message}`);
-  process.exit(1);
-});
