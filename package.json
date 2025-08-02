@@ -1,6 +1,6 @@
 {
   "name": "togetherjs-hub",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Self-hosted TogetherJS Hub server",
   "main": "hub/server.cjs",
   "type": "commonjs",
@@ -9,6 +9,7 @@
     "start": "node hub/server.cjs"
   },
   "dependencies": {
-    "websocket": "^1.0.34"
+    "websocket": "^1.0.34",
+    "optimist": "^0.6.1"
   }
 }
