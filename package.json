@@ -7,6 +7,6 @@
     "postinstall": "node scripts/fetch.js"
   },
   "dependencies": {
-    "ws": "^8.17.0"
+    "websocket": "^1.0.34"
   }
 }
