@@ -1,12 +1,15 @@
 {
   "name": "togetherjs-hub",
   "version": "1.0.0",
-  "description": "Minimal TogetherJS Hub server for Koyeb",
+  "description": "Self-hosted TogetherJS Hub server",
   "main": "hub/server.cjs",
+  "type": "commonjs",
   "scripts": {
-    "postinstall": "node scripts/fetch.js"
+    "fetch": "node scripts/fetch.js",
+    "start": "node hub/server.cjs"
   },
   "dependencies": {
     "websocket": "^1.0.34"
   }
 }
+
